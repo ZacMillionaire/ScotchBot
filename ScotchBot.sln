@@ -1,0 +1,44 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25123.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScotchConsole", "ScotchConsole\ScotchConsole.csproj", "{71F4B7EB-C0EA-4C85-81E1-548A29C08D9E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScotchBotLib", "ScotchBotLib\ScotchBotLib.csproj", "{30767454-7925-4D5A-8E5B-6C6DD833F8E8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|Mixed Platforms = Debug|Mixed Platforms
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|Mixed Platforms = Release|Mixed Platforms
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{71F4B7EB-C0EA-4C85-81E1-548A29C08D9E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{71F4B7EB-C0EA-4C85-81E1-548A29C08D9E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{71F4B7EB-C0EA-4C85-81E1-548A29C08D9E}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{71F4B7EB-C0EA-4C85-81E1-548A29C08D9E}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{71F4B7EB-C0EA-4C85-81E1-548A29C08D9E}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{71F4B7EB-C0EA-4C85-81E1-548A29C08D9E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{71F4B7EB-C0EA-4C85-81E1-548A29C08D9E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{71F4B7EB-C0EA-4C85-81E1-548A29C08D9E}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{71F4B7EB-C0EA-4C85-81E1-548A29C08D9E}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{71F4B7EB-C0EA-4C85-81E1-548A29C08D9E}.Release|x86.ActiveCfg = Release|Any CPU
+		{30767454-7925-4D5A-8E5B-6C6DD833F8E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{30767454-7925-4D5A-8E5B-6C6DD833F8E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{30767454-7925-4D5A-8E5B-6C6DD833F8E8}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{30767454-7925-4D5A-8E5B-6C6DD833F8E8}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{30767454-7925-4D5A-8E5B-6C6DD833F8E8}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{30767454-7925-4D5A-8E5B-6C6DD833F8E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{30767454-7925-4D5A-8E5B-6C6DD833F8E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{30767454-7925-4D5A-8E5B-6C6DD833F8E8}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{30767454-7925-4D5A-8E5B-6C6DD833F8E8}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{30767454-7925-4D5A-8E5B-6C6DD833F8E8}.Release|x86.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
