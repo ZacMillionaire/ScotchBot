@@ -6,6 +6,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Configuration;
+using ScotchBotLib.Utilities.Logging;
+using System.Net.WebSockets;
 
 namespace ScotchConsole {
 	class Program {
@@ -14,8 +16,8 @@ namespace ScotchConsole {
 
 		static void Main(string[] args) {
 			SetupBot();
-			ScotchBot bot = new ScotchBot();
-			bot.PreFetch(ConfigurationManager.AppSettings["ApiKey"]);
+			ScotchBot bot = new ScotchBot(ConfigurationManager.AppSettings["ApiKey"]);
+			bot.Connect();
 			bot.LoadScripts(_scriptDirectory);
 			//bot.CallScript("TestScript");
 			Console.ReadLine();
@@ -23,10 +25,12 @@ namespace ScotchConsole {
 
 		private static void SetupBot() {
 			if(Directory.Exists(_scriptDirectory)) {
-				Console.WriteLine("Script directory already exists. Skipping.");
+				Logging.Log("Script directory already exists. Skipping.");
+				//Console.WriteLine("Script directory already exists. Skipping.");
 			} else {
 				DirectoryInfo di = Directory.CreateDirectory(_scriptDirectory);
-				Console.WriteLine("Created script directory at {0}.", Directory.GetCreationTime(_scriptDirectory));
+				Logging.Log(string.Format("Created script directory at {0}.", Directory.GetCreationTime(_scriptDirectory)));
+				//Console.WriteLine("Created script directory at {0}.", Directory.GetCreationTime(_scriptDirectory));
 			}
 		}
 	}

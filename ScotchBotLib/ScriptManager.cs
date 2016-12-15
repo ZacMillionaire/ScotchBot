@@ -12,6 +12,9 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.CSharp;
 using ScotchBotLib.Models;
 using WebSocketSharp;
+using ScotchBotLib.Utilities.Logging;
+using StackExchange.Redis;
+using ScotchBotLib.Controllers;
 
 namespace ScotchBotLib {
 
@@ -24,9 +27,12 @@ namespace ScotchBotLib {
 
 		private static string _scriptDirectory;
 		private static List<Script> _scriptFiles;
+		private static BotDetails _self;
+		private static IDatabase _redisCache = RedisStore.RedisCache;
 
-		public static void LoadScripts(string ScriptSrc) {
+		public static void LoadScripts(string ScriptSrc, BotDetails self) {
 			_scriptDirectory = ScriptSrc;
+			_self = self;
 			_scriptFiles = Directory.GetFiles(_scriptDirectory, "*.csx")
 				.Select(x =>
 					new Script {
@@ -41,6 +47,10 @@ namespace ScotchBotLib {
 			// Example method exposed
 			public void ExecuteHostMethod(string a) {
 				Console.WriteLine("From script: " + a);
+			}
+
+			public BotDetails GetSelfStatus() {
+				return _self;
 			}
 			public SlackMessage Message { get; set; }
 			public LogonEventMessage Channel { get; set; }
@@ -66,7 +76,8 @@ namespace ScotchBotLib {
 				// load script from file and execute
 				script = System.IO.File.ReadAllText(_scriptFiles.First(x => x.Name == ScriptName).Source);
 				try {
-					Console.WriteLine("[SCRIPT] Executing "+ScriptName);
+					Logging.Log("[SCRIPT] Executing " + ScriptName);
+					//Console.WriteLine("[SCRIPT] Executing "+ScriptName);
 					var s = CSharpScript.Create(code: script, options: options, globalsType: typeof(Host));
 					ScriptRunner<object> runner = s.CreateDelegate();
 					Host h = new Host { Message = message, Channel = channelState, ws = ws };
@@ -75,13 +86,15 @@ namespace ScotchBotLib {
 
 					// TODO: Make a helper function to do this probably
 					Console.ForegroundColor = ConsoleColor.Red;
-					Console.WriteLine("Script failed to compile:");
-					Console.WriteLine(ex.GetBaseException().Message);
+					//Console.WriteLine("Script failed to compile:");
+					//Console.WriteLine(ex.GetBaseException().Message);
+					Logging.Log("Script failed to compile:");
+					Logging.Log(ex.GetBaseException().Message);
 					Console.ForegroundColor = ConsoleColor.White;
 				}
 
 			} else {
-				Console.WriteLine("No script exists for: "+ScriptName);
+				Console.WriteLine("No script exists for: " + ScriptName);
 			}
 
 			// syntax tree explorer for usings, won't pick up methods directly accessed via fully qualified names though
