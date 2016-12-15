@@ -84,18 +84,18 @@ namespace ScotchBotLib {
 			try {
 
 				Dictionary<string, object> messageObject = JsonConvert.DeserializeObject<Dictionary<string, object>>(e.Data, new JsonConverter[] { new NestedDictionaryConverter() });
-
+				messageObject.Add("_timestamp", DateTime.UtcNow.ToString("o"));
 				Type messageType = MessageHandler.ToInternalClassType(messageObject["type"] as string);
 
 				if(messageType != null) {
 					if(messageType.Name != "ReconnectUrl") {
-						AddToList<string>(DateTime.Now.AddSeconds(-59).ToString("yyyy-MM-ddTHH-00-00"), e.Data);
+						AddToList<string>(DateTime.Now.AddSeconds(-59).ToString("yyyy-MM-dd:HH-00-00"), /*e.Data*/JsonConvert.SerializeObject(messageObject));
 					}
 					var message = (SlackMessage)JsonConvert.DeserializeObject(e.Data, messageType);
 					CallScript(message.GetType().Name, message);
 				} else {
 					if(messageObject["type"] as string != "user_typing" && messageObject["type"] as string != "pong") {
-						AddToList<string>(DateTime.Now.AddSeconds(-59).ToString("yyyy-MM-ddTHH-00-00"), e.Data);
+						AddToList<string>(DateTime.Now.AddSeconds(-59).ToString("yyyy-MM-dd:HH-00-00"), /*e.Data*/JsonConvert.SerializeObject(messageObject));
 					}
 					Logging.Log("Unscripted Message Type: " + messageObject["type"]);
 				}
